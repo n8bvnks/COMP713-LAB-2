@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+<h1>Greeting App</h1>
+
+
+<form id="form">
+
+<input id="name">
+
+<button>
+Send
+</button>
+
+</form>
+
+
+<p id="output"></p>
+
+
+<script>
+
+const form =
+document.querySelector("#form");
+
+
+form.addEventListener(
+"submit",
+async e=>{
+
+
+e.preventDefault();
+
+
+let name =
+document.querySelector("#name").value;
+
+
+let response =
+await fetch(
+"/lifecycle-lab/api/greeting",
+{
+method:"POST",
+headers:{
+"Content-Type":
+"application/x-www-form-urlencoded"
+},
+
+body:
+"name="+name
+
+});
+
+
+let data =
+await response.json();
+
+
+document.querySelector("#output")
+.innerHTML =
+data.message;
+
+
+});
+
+</script>
+
+
+</body>
+
+</html>
