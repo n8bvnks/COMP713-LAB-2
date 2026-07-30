@@ -33,46 +33,42 @@ request.getReader()
 ) {
 JsonObject input =
 reader.readObject();
+
 // TODO 1:
 // Read the "name" value,
 // use an empty default,
 // and remove surrounding spaces.
-String name = "";
+String name = input.getString("").trim();
 System.out.println(
 "4. JSON input read"
 );
+
 // TODO 2:
 // Reject a missing or blank name.
 // At present, validation is disabled.
-boolean invalid = false;
-if (invalid) {
-writeError(
-response,
-HttpServletResponse
-.SC_BAD_REQUEST,
-
-"Name is required."
-);
-return;
+if(name.isBlank()){
+        writeError(response,
+                        HttpServletResponse.SC_BAD_REQUEST,
+                "Name is required");
+                return;
 }
-System.out.println(
-"5. Calling application logic"
-);
 // TODO 3:
 // Call GreetingService.
 String message =
-"Greeting not implemented";
-int length = 0;
+service.createMessage(name);
+int length = service.calculateLength(name);
 JsonObject output =
 Json.createObjectBuilder()
 .add("message", message)
 .add("length", length)
 .build();
+
+
 // TODO 4:
 // Select the correct success status.
 response.setStatus(
 HttpServletResponse
-.SC_ACCEPTED
+.SC_OK
 );
 try (
 JsonWriter writer =
