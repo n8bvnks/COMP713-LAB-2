@@ -38,7 +38,7 @@ reader.readObject();
 // Read the "name" value,
 // use an empty default,
 // and remove surrounding spaces.
-String name = input.getString("").trim();
+String name = input.getString("name","").trim();
 System.out.println(
 "4. JSON input read"
 );
