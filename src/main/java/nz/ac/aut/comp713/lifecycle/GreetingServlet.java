@@ -48,9 +48,10 @@ System.out.println(
 // At present, validation is disabled.
 if(name.isBlank()){
         writeError(response,
-                        HttpServletResponse.SC_BAD_REQUEST,
+                HttpServletResponse.SC_BAD_REQUEST,
                 "Name is required");
-                return;
+
+        return;
 }
 // TODO 3:
 // Call GreetingService.
